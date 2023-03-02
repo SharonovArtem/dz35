@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace dzkurs
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Dictionary<string, string> dossiers = new Dictionary<string, string>();
+            string name = "";
+            string command;
+            string addDossierCommand = "1";
+            string showAllDossiersCommand = "2";
+            string deleteDossierCommand = "3";
+            string exitCommand = "4";
+            bool isWorking = true;
+
+            while (isWorking)
+            {
+                Console.WriteLine("Введите команду");
+                command = Console.ReadLine();
+
+                if (command == addDossierCommand)
+                {
+                    CompleteDossier(ref dossiers, ref name);
+                }
+                else if (command == showAllDossiersCommand)
+                {
+                    ShowDossier(dossiers);
+                }
+                else if (command == deleteDossierCommand)
+                {
+                    DeleteDossier(ref dossiers, ref name);
+                }
+                else if (command == exitCommand)
+                {
+                    Console.WriteLine("До свидания!");
+                    isWorking = false;
+                }
+            }
+        }
+
+        static void CompleteDossier(ref Dictionary<string, string> dossiers, ref string name)
+        {
+            string post;
+
+            Console.WriteLine("Введите ФИО");
+            name = Console.ReadLine();
+            Console.WriteLine("Введите должность");
+            post = Console.ReadLine();
+
+            dossiers.Add(name, post);
+
+            Console.WriteLine("Должность " + post + " Установлена на сотрудника " + name);
+        }
+       
+        static void ShowDossier(Dictionary<string, string> dossiers)
+        {
+            int count = 0;
+
+            foreach (var dossier in dossiers)
+            {
+                count++;
+                Console.WriteLine(count + ". " + dossier.Key + " - " + dossier.Value);
+            }
+        }
+
+        static void DeleteDossier(ref Dictionary<string, string> dossiers, ref string name)
+        {
+            Console.WriteLine("Должность " + dossiers.Last() + " удалена");
+
+            dossiers.Remove(name);
+        }
+    }
+}
