@@ -12,7 +12,6 @@ namespace dzkurs
         static void Main(string[] args)
         {
             Dictionary<string, string> dossiers = new Dictionary<string, string>();
-            string name = "";
             string command;
             string addDossierCommand = "1";
             string showAllDossiersCommand = "2";
@@ -27,7 +26,7 @@ namespace dzkurs
 
                 if (command == addDossierCommand)
                 {
-                    CompleteDossier(ref dossiers, ref name);
+                    AddDossier(ref dossiers);
                 }
                 else if (command == showAllDossiersCommand)
                 {
@@ -35,7 +34,7 @@ namespace dzkurs
                 }
                 else if (command == deleteDossierCommand)
                 {
-                    DeleteDossier(ref dossiers, ref name);
+                    DeleteDossier(ref dossiers);
                 }
                 else if (command == exitCommand)
                 {
@@ -45,8 +44,9 @@ namespace dzkurs
             }
         }
 
-        static void CompleteDossier(ref Dictionary<string, string> dossiers, ref string name)
+        static void AddDossier(ref Dictionary<string, string> dossiers)
         {
+            string name;
             string post;
 
             Console.WriteLine("Введите ФИО");
@@ -58,7 +58,7 @@ namespace dzkurs
 
             Console.WriteLine("Должность " + post + " Установлена на сотрудника " + name);
         }
-       
+
         static void ShowDossier(Dictionary<string, string> dossiers)
         {
             int count = 0;
@@ -70,9 +70,11 @@ namespace dzkurs
             }
         }
 
-        static void DeleteDossier(ref Dictionary<string, string> dossiers, ref string name)
+        static void DeleteDossier(ref Dictionary<string, string> dossiers)
         {
-            Console.WriteLine("Должность " + dossiers.Last() + " удалена");
+            string name;
+            name = dossiers.Keys.Last();
+            Console.WriteLine("Должность " + name + " удалена");
 
             dossiers.Remove(name);
         }
