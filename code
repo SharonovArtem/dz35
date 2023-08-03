@@ -84,15 +84,18 @@ namespace dzkurs
         static void DeleteDossier(ref List<string> names, ref List<string> positions)
         {
             string name;
+            string position;
 
             Console.WriteLine("Введите ФИО, которе хотите удалить");
             name = Console.ReadLine();
- 
+            Console.WriteLine("Какая должность зарегистрирована на это ФИО?");
+            position = Console.ReadLine();
+
             Console.WriteLine("Должность " + name + " удалена");
 
             for (int i = 0; i < names.Count; i++)
             {
-                if (names[i] == name)
+                if (names[i] == name && positions[i] == position)
                 {
                     names.RemoveAt(i);
                     positions.RemoveAt(i);
