@@ -11,7 +11,8 @@ namespace dzkurs
     {
         static void Main(string[] args)
         {
-            Dictionary<string, string> dossiers = new Dictionary<string, string>();
+            List<string> names = new List<string>();
+            List<string> positions = new List<string>();
             string command;
             string addDossierCommand = "1";
             string showAllDossiersCommand = "2";
@@ -21,62 +22,82 @@ namespace dzkurs
 
             while (isWorking)
             {
+                Console.WriteLine("Добавить досье - " + addDossierCommand);
+                Console.WriteLine("Показать все досье - " + showAllDossiersCommand);
+                Console.WriteLine("Удалить досье - " + deleteDossierCommand);
+                Console.WriteLine("Выйти - " + exitCommand);
                 Console.WriteLine("Введите команду");
+
                 command = Console.ReadLine();
 
                 if (command == addDossierCommand)
                 {
-                    AddDossier(ref dossiers);
+                    AddDossier(ref names, ref positions);
                 }
                 else if (command == showAllDossiersCommand)
                 {
-                    ShowDossier(dossiers);
+                    ShowAllDossiers(names, positions);
                 }
                 else if (command == deleteDossierCommand)
                 {
-                    DeleteDossier(ref dossiers);
+                    DeleteDossier(ref names, ref positions);
                 }
                 else if (command == exitCommand)
                 {
                     Console.WriteLine("До свидания!");
                     isWorking = false;
                 }
+                else
+                {
+                    Console.WriteLine("Неизвестная команда");
+                }
             }
         }
 
-        static void AddDossier(ref Dictionary<string, string> dossiers)
+        static void AddDossier(ref List<string> names, ref List<string> positions)
         {
             string name;
             string post;
 
             Console.WriteLine("Введите ФИО");
             name = Console.ReadLine();
+            names.Add(name);
+
             Console.WriteLine("Введите должность");
             post = Console.ReadLine();
-
-            dossiers.Add(name, post);
+            positions.Add(post);
 
             Console.WriteLine("Должность " + post + " Установлена на сотрудника " + name);
         }
 
-        static void ShowDossier(Dictionary<string, string> dossiers)
+        static void ShowAllDossiers(List<string> names, List<string> positions)
         {
             int count = 0;
 
-            foreach (var dossier in dossiers)
+            for (int i = 0; i < names.Count; i++)
             {
                 count++;
-                Console.WriteLine(count + ". " + dossier.Key + " - " + dossier.Value);
+                Console.WriteLine(count + ". " + names[i] + " - " + positions[i]);
             }
         }
 
-        static void DeleteDossier(ref Dictionary<string, string> dossiers)
+        static void DeleteDossier(ref List<string> names, ref List<string> positions)
         {
             string name;
-            name = dossiers.Keys.Last();
+
+            Console.WriteLine("Введите ФИО, которе хотите удалить");
+            name = Console.ReadLine();
+ 
             Console.WriteLine("Должность " + name + " удалена");
 
-            dossiers.Remove(name);
+            for (int i = 0; i < names.Count; i++)
+            {
+                if (names[i] == name)
+                {
+                    names.RemoveAt(i);
+                    positions.RemoveAt(i);
+                }
+            }
         }
     }
 }
