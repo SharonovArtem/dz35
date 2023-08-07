@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace dzkurs
 {
@@ -32,7 +28,7 @@ namespace dzkurs
 
                 if (command == addDossierCommand)
                 {
-                    AddDossier(ref names, ref positions);
+                    AddDossier(names, positions);
                 }
                 else if (command == showAllDossiersCommand)
                 {
@@ -40,7 +36,7 @@ namespace dzkurs
                 }
                 else if (command == deleteDossierCommand)
                 {
-                    DeleteDossier(ref names, ref positions);
+                    DeleteDossier(names, positions);
                 }
                 else if (command == exitCommand)
                 {
@@ -54,7 +50,7 @@ namespace dzkurs
             }
         }
 
-        static void AddDossier(ref List<string> names, ref List<string> positions)
+        static void AddDossier(List<string> names, List<string> positions)
         {
             string name;
             string post;
@@ -81,26 +77,19 @@ namespace dzkurs
             }
         }
 
-        static void DeleteDossier(ref List<string> names, ref List<string> positions)
+        static void DeleteDossier(List<string> names, List<string> positions)
         {
-            string name;
-            string position;
+            int name;
+            int position;
 
-            Console.WriteLine("Введите ФИО, которе хотите удалить");
-            name = Console.ReadLine();
-            Console.WriteLine("Какая должность зарегистрирована на это ФИО?");
-            position = Console.ReadLine();
+            Console.WriteLine("Введите позицию, которую хотите удалить");
+            name = Convert.ToInt32(Console.ReadLine());
+            position = name;
 
-            Console.WriteLine("Должность " + name + " удалена");
-
-            for (int i = 0; i < names.Count; i++)
-            {
-                if (names[i] == name && positions[i] == position)
-                {
-                    names.RemoveAt(i);
-                    positions.RemoveAt(i);
-                }
-            }
+            Console.WriteLine("Должность " + names[name - 1] + " удалена");
+          
+            names.RemoveAt(name - 1);
+            positions.RemoveAt(position - 1);
         }
     }
 }
