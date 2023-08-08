@@ -83,9 +83,7 @@ namespace dzkurs
 
             Console.WriteLine("Введите позицию, которую хотите удалить");
 
-            bool result = Int32.TryParse(Console.ReadLine(), out index);
-
-            if (result)
+            if (Int32.TryParse(Console.ReadLine(), out index))
             {
                 Console.WriteLine("Должность " + names[index - 1] + " удалена");
 
