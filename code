@@ -79,17 +79,23 @@ namespace dzkurs
 
         static void DeleteDossier(List<string> names, List<string> positions)
         {
-            int name;
-            int position;
+            int index;
 
             Console.WriteLine("Введите позицию, которую хотите удалить");
-            name = Convert.ToInt32(Console.ReadLine());
-            position = name;
 
-            Console.WriteLine("Должность " + names[name - 1] + " удалена");
-          
-            names.RemoveAt(name - 1);
-            positions.RemoveAt(position - 1);
+            bool result = Int32.TryParse(Console.ReadLine(), out index);
+
+            if (result)
+            {
+                Console.WriteLine("Должность " + names[index - 1] + " удалена");
+
+                names.RemoveAt(index - 1);
+                positions.RemoveAt(index - 1);
+            }
+            else
+            {
+                Console.WriteLine("Неверный ввод");
+            }
         }
     }
 }
